@@ -35,11 +35,21 @@ int main() {
   );
 
   SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Color negro para limpiar la pantalla
-  SDL_RenderClear(renderer);
-  SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
+  
+  int running = 1;
 
-  SDL_RenderPresent(renderer);
-  SDL_Delay(2000);
+  while (running) {
+    while (SDL_PollEvent(&event)) {
+      if (event.type == SDL_QUIT) {
+        running = 0;
+      }
+    }
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Color negro para limpiar la pantalla
+    SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 230, 230, 230, 255);
+
+    SDL_RenderPresent(renderer);
+  }
+
   return 0;
 }
